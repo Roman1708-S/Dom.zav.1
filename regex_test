@@ -1,0 +1,41 @@
+from datetime import datetime, timedelta
+
+def string_to_date(date_string):
+    return datetime.strptime(date_string, "%Y.%m.%d").date()
+
+def find_next_weekday(start_date, weekday):
+    """
+    Знаходить наступний день тижня після start_date.
+    
+    weekday: 0 = понеділок, 1 = вівторок, ..., 6 = неділя
+    """
+    # Знаходимо, який день тижня зараз (0-6)
+    current_weekday = start_date.weekday()
+    
+    # Обчислюємо, скільки днів додати
+    days_ahead = weekday - current_weekday
+    
+    # Якщо шуканий день вже минув цього тижня, беремо наступний тиждень
+    if days_ahead <= 0:
+        days_ahead += 7
+    
+    # Додаємо дні до початкової дати
+    return start_date + timedelta(days=days_ahead)
+
+
+# Приклади використання:
+today = datetime.now().date()
+print(f"Сьогодні: {today}")
+
+# Знайти наступний понеділок (0)
+next_monday = find_next_weekday(today, 0)
+print(f"Наступний понеділок: {next_monday}")
+
+# Знайти наступну п'ятницю (4)
+next_friday = find_next_weekday(today, 4)
+print(f"Наступна п'ятниця: {next_friday}")
+
+# Приклад з конкретною датою
+some_date = string_to_date("2025.01.22")
+next_wednesday = find_next_weekday(some_date, 2)
+print(f"Наступна середа після {some_date}: {next_wednesday}")
