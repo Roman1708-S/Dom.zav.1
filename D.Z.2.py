@@ -9,8 +9,6 @@ def get_numbers_ticket(min, max, quantity):
         return []
     if min >= max:
         return []
-    if quantity < min or quantity > max:
-        return []
     if quantity > (max - min + 1):  # Кількість не може перевищувати діапазон
         return []
 
